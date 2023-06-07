@@ -1,0 +1,15 @@
+.footer__content {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  padding-bottom: 60px;
+  padding-top: 67px;
+  padding-left: 200px;
+  width: 318px;
+  height: 18px;
+  padding-right: 762px;
+  margin: 0 auto;
+}
