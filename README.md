@@ -18,4 +18,6 @@ This project is made so all the elements are displayed correctly on popular scre
 
 The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
 
-- [Link to Github](git@github.com:etice60/se_project_aroundtheus.git)
+**github**
+
+- [Link to Github](git@github.com:etice60/se_project_aroundtheus.git](https://github.com/etice60/se_project_aroundtheus/edit/main/README.md)
