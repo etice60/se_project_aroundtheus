@@ -20,4 +20,4 @@ The way you'll do this at work is by exporting images directly from Figma — we
 
 **github**
 
-- [Link to Github](git@github.com:etice60/se_project_aroundtheus.git)
+- [Link to Github](https://etice60.github.io/se_project_aroundtheus/)
