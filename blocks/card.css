@@ -31,9 +31,7 @@
   border-radius: 0px 0px 10px 10px;
 }
 .card__title {
-  width: 142px;
-  height: 29px;
-  font-family: "Inter";
+  font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   line-height: 29px;
   font-weight: 900;
@@ -42,6 +40,7 @@
   white-space: nowrap;
   overflow: hidden;
   margin: 0;
+  max-width: 214px;
 }
 .card__like-button {
   background: transparent url(../images/like-inactive.svg) center no-repeat;
