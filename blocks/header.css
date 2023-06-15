@@ -1,18 +1,26 @@
 .header__image {
   padding-bottom: 41px;
 }
+
 .header {
   max-width: 880px;
   width: 100%;
   position: relative;
   margin: 0 auto;
   margin: 45px auto 0;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
+}
+
+@media screen and (max-width: 917px) {
+  .header {
+    padding: 0;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .header {
     margin: 0;
+    padding: 0;
   }
   .header__image {
     padding-top: 28px;
@@ -20,10 +28,5 @@
     padding-bottom: 32px;
     width: 126px;
     height: 24px;
-  }
-}
-@media screen and (max-width: 915px) {
-  .header {
-    max-width: 581px;
   }
 }
