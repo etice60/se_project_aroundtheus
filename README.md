@@ -1,18 +1,17 @@
-# Project 3: Around The U.S.
+# Project 4: Around The U.S.
 
 ### Overview
 
-- Intro
-- Figma
-- Images
+- Modal
+- Javacript
 
 **Intro**
 
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
+This project focuses on the Javascript and making the page interactive. Modal box is created and the user can enter in thaie name and description. We have also styled the page through Javascript in the card elements.
 
 **Figma**
 
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- [Link to the project on Figma](https://www.figma.com/file/EO5AaNCuzzFL7X5gSY7HwQ/Sprint-4_-Around-The-U.S.-_-desktop-%2B-mobile?type=design&mode=design)
 
 **Images**
 
