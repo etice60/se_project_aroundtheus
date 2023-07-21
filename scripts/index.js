@@ -45,7 +45,7 @@ const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardPreviewCloseButton = cardImageModal.querySelector(
-  ".modal__preview_close_button"
+  ".modal__preview_close-button"
 );
 
 // Form Data
