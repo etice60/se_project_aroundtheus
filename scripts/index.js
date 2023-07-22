@@ -98,16 +98,17 @@ function getCardElement(data) {
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
 
+  cardPreviewCloseButton.addEventListener("click", () => {
+    closeModal(cardImageModal);
+  });
+  3;
+
   // Preview Card
   cardImage.addEventListener("click", () => {
     cardPreviewImage.src = data.link;
     cardPreviewImage.alt = data.name;
     cardPreviewTitle.textContent = data.name;
     openModal(cardImageModal);
-  });
-
-  cardPreviewCloseButton.addEventListener("click", () => {
-    closeModal(cardImageModal);
   });
 
   deleteButton.addEventListener("click", () => {
