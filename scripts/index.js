@@ -142,11 +142,7 @@ addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 profileEditButton.addEventListener("click", () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
-  toggleButtonState(
-    [nameInput, jobInput],
-    editProfileSubmitButton,
-    config.inactiveButtonClass
-  );
+  toggleButtonState([nameInput, jobInput], editProfileSubmitButton, config);
   openModal(editProfileModal);
 });
 profileModalCloseButton.addEventListener("click", () =>
