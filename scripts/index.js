@@ -142,7 +142,6 @@ addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 profileEditButton.addEventListener("click", () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
-  console.log(nameInput.value, jobInput.value);
   toggleButtonState(
     [nameInput, jobInput],
     editProfileSubmitButton,
