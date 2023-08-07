@@ -162,16 +162,11 @@ addCardModalCloseButton.addEventListener("click", () =>
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
-const isEscEvent = (evt, action) => {
+const handleEscUp = (evt) => {
   if (evt.key === "Escape") {
     const activeModal = document.querySelector(".modal_is-opened");
-    action(activeModal);
+    closeModal(activeModal);
   }
-};
-
-const handleEscUp = (evt) => {
-  evt.preventDefault;
-  isEscEvent(evt, closeModal);
 };
 
 [editProfileModal, addCardModal, cardImageModal].forEach((modal) => {
