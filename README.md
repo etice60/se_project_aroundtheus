@@ -7,7 +7,7 @@
 
 **Intro**
 
-This project focuses on the Javascript and making the page interactive. Modal box is created and the user can enter in thaie name and description. We have also styled the page through Javascript in the card elements.
+This project focuses on the Javascript and making the page interactive. Modal box is created and the user can enter in the name and description. We have also styled the page through Javascript in the card elements.
 
 **Figma**
 

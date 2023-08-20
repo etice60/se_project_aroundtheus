@@ -1,3 +1,5 @@
+import { openModal, closeModal, handleEscUp } from "../utils/utils.js";
+
 const cardImageModal = document.querySelector("#card-image");
 const cardPreviewImage = document.querySelector(".modal__card-image-preview");
 const cardPreviewTitle = document.querySelector(".modal__title");
@@ -32,6 +34,7 @@ class Card {
 
   _handleDeleteCard() {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
   _handleLikeIcon() {

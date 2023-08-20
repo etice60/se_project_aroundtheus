@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import { openModal, closeModal, handleEscUp } from "../utils/utils.js";
 
 const initialCards = [
   {
@@ -78,7 +79,7 @@ const cardSelector = "#card-template";
 /*         Validation         */
 /*----------------------------*/
 
-const validationSettings = {
+const settings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
@@ -89,25 +90,11 @@ const validationSettings = {
 const editFormElement = editProfileModal.querySelector(".modal__form");
 const addFormElement = addCardModal.querySelector(".modal__form");
 
-const editFormValidator = new FormValidator(
-  validationSettings,
-  editFormElement
-);
-
-const addFormValidator = new FormValidator(validationSettings, addFormElement);
+const editFormValidator = new FormValidator(settings, editFormElement);
+const addFormValidator = new FormValidator(settings, addFormElement);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-
-function closeModal(modal) {
-  modal.classList.remove("modal_is-opened");
-  document.removeEventListener("keyup", handleEscUp);
-}
-
-function openModal(modal) {
-  modal.classList.add("modal_is-opened");
-  document.addEventListener("keyup", handleEscUp);
-}
 
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
@@ -131,11 +118,11 @@ function handleAddCardFormSubmit(evt) {
   renderCard({ name, link }, cardsWrap);
   closeModal(addCardModal);
   addCardFormElement.reset();
-  toggleButtonState(
-    [cardTitleInput, cardUrlInput],
-    addCardSubmitButton,
-    config
-  );
+  //toggleButtonState(
+  // [cardTitleInput, cardUrlInput],
+  //addCardSubmitButton,
+  //config
+  //);
 
   addFormValidator.toggleButtonState();
 }
@@ -195,13 +182,6 @@ addCardModalCloseButton.addEventListener("click", () =>
 );
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
-
-const handleEscUp = (evt) => {
-  if (evt.key === "Escape") {
-    const activeModal = document.querySelector(".modal_is-opened");
-    closeModal(activeModal);
-  }
-};
 
 [editProfileModal, addCardModal, cardImageModal].forEach((modal) => {
   modal.addEventListener("click", (event) => {
