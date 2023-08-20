@@ -24,19 +24,6 @@ function hasInvalidInput(inputList) {
   return inputList.some((inputEl) => !inputEl.validity.valid);
 }
 
-//disabledButton
-/*function disableButton(inputEls, submitButton, inactiveButtonClass) {
-  submitButton.classList.add(inactiveButtonClass);
-  submitButton.disabled = true;
-  return;
-}
-
-//enabledButton
-function enableButton(inputEls, submitButton, inactiveButtonClass) {
-  submitButton.classList.remove(inactiveButtonClass);
-  submitButton.disabled = false;
-}*/
-
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
   if (hasInvalidInput(inputEls)) {
     submitButton.classList.add(inactiveButtonClass);
@@ -46,15 +33,6 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 
   submitButton.classList.remove(inactiveButtonClass);
   submitButton.disabled = false;
-
-  /*if (hasInvalidInput(inputEls)) {
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.disabled = true;
-    return;
-  }
-
-  submitButton.classList.remove(inactiveButtonClass);
-  submitButton.disabled = false;*/
 }
 
 function setEventListeners(formEl, options) {

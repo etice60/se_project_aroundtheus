@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +27,11 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
 
 const cardTemplate = document
   .querySelector("#card-template")
@@ -65,6 +73,32 @@ const cardTitleInput = addCardFormElement.querySelector(
 
 const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
+const cardSelector = "#card-template";
+/*----------------------------*/
+/*         Validation         */
+/*----------------------------*/
+
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormElement = editProfileModal.querySelector(".modal__form");
+const addFormElement = addCardModal.querySelector(".modal__form");
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  editFormElement
+);
+
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
   document.removeEventListener("keyup", handleEscUp);
@@ -77,7 +111,8 @@ function openModal(modal) {
 
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardElement);
+  const card = new Card(cardData, cardSelector);
+  wrapper.prepend(card.getView());
 }
 
 function handleProfileFormSubmit(evt) {
@@ -85,6 +120,8 @@ function handleProfileFormSubmit(evt) {
   profileTitle.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
   closeModal(editProfileModal);
+
+  editFormValidator.toggleButtonState();
 }
 
 function handleAddCardFormSubmit(evt) {
@@ -99,6 +136,8 @@ function handleAddCardFormSubmit(evt) {
     addCardSubmitButton,
     config
   );
+
+  addFormValidator.toggleButtonState();
 }
 
 function getCardElement(data) {
@@ -142,7 +181,7 @@ addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 profileEditButton.addEventListener("click", () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
-  toggleButtonState([nameInput, jobInput], editProfileSubmitButton, config);
+  //toggleButtonState([nameInput, jobInput], editProfileSubmitButton, config);
   openModal(editProfileModal);
 });
 profileModalCloseButton.addEventListener("click", () =>
