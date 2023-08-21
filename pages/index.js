@@ -146,8 +146,7 @@ initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
   modal.addEventListener("click", (event) => {
     if (
       event.target.classList.contains("modal") ||
-      event.target.classList.contains("modal__close") ||
-      event.target.classList.contains("modal__image-close-button")
+      event.target.classList.contains("modal__close")
     ) {
       closeModal(modal);
     }
