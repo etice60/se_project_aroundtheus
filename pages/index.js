@@ -97,7 +97,6 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
   const card = new Card(cardData, cardSelector);
   wrapper.prepend(card.getView());
 }
@@ -127,40 +126,6 @@ function handleAddCardFormSubmit(evt) {
   addFormValidator.toggleButtonState();
 }
 
-function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-
-  // Preview Card
-  cardImage.addEventListener("click", () => {
-    cardPreviewImage.src = data.link;
-    cardPreviewImage.alt = data.name;
-    cardPreviewTitle.textContent = data.name;
-    openModal(cardImageModal);
-  });
-
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardTitle.textContent = data.name;
-
-  return cardElement;
-}
-
-cardPreviewCloseButton.addEventListener("click", () => {
-  closeModal(cardImageModal);
-});
-
 // Form Listerners
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
@@ -171,15 +136,9 @@ profileEditButton.addEventListener("click", () => {
   //toggleButtonState([nameInput, jobInput], editProfileSubmitButton, config);
   openModal(editProfileModal);
 });
-profileModalCloseButton.addEventListener("click", () =>
-  closeModal(editProfileModal)
-);
 
 // Add New Card
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
-addCardModalCloseButton.addEventListener("click", () =>
-  closeModal(addCardModal)
-);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
@@ -187,7 +146,8 @@ initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
   modal.addEventListener("click", (event) => {
     if (
       event.target.classList.contains("modal") ||
-      event.target.classList.contains("modal__close")
+      event.target.classList.contains("modal__close") ||
+      event.target.classList.contains("modal__image-close-button")
     ) {
       closeModal(modal);
     }
