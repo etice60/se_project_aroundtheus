@@ -2,8 +2,12 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import { openModal, closeModal, handleEscUp } from "../utils/utils.js";
 import "../pages/index.css";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
-const initialCards = [
+export const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -30,12 +34,12 @@ const initialCards = [
   },
 ];
 
-const cardData = {
+export const cardData = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-const cardTemplate = document
+export const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
@@ -64,16 +68,18 @@ const cardPreviewCloseButton = cardImageModal.querySelector(
 );
 
 // Form Data
+const userInfo = new UserInfo(profileTitle, profileDescription);
+
 const nameInput = profileFormElement.querySelector(".modal__input_type_name");
 const jobInput = profileFormElement.querySelector(
   ".modal__input_type_description"
 );
 
-const cardTitleInput = addCardFormElement.querySelector(
+/*const cardTitleInput = addCardFormElement.querySelector(
   ".modal__input_type_title"
 );
 
-const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
+const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");*/
 
 const cardSelector = "#card-template";
 /*----------------------------*/
@@ -91,15 +97,48 @@ const settings = {
 const editFormElement = editProfileModal.querySelector(".modal__form");
 const addFormElement = addCardModal.querySelector(".modal__form");
 
+/*----------------------*/
+/*      popup items     */
+/*----------------------*/
+
 const editFormValidator = new FormValidator(settings, editFormElement);
 const addFormValidator = new FormValidator(settings, addFormElement);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
+const addCardPopup = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
+addCardPopup.setEventListeners();
+
+const editProfilePopup = new PopupWithForm(
+  "#edit-modal",
+  handleProfileFormSubmit
+);
+editProfilePopup.setEventListeners();
+
 function renderCard(cardData, wrapper) {
-  const card = new Card(cardData, cardSelector);
-  wrapper.prepend(card.getView());
+  const newCard = new Card(cardData, cardSelector, handleCardClick);
+  cardSection.addItem(newCard.getView());
+}
+
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  cardTemplate
+);
+
+cardSection.renderItems();
+
+const imagePreviewPopup = new PopupWithImage("#card-image");
+imagePreviewPopup.setEventListeners();
+
+function handleCardClick(name, link) {
+  imagePreviewPopup.open(name, link);
 }
 
 function handleProfileFormSubmit(evt) {

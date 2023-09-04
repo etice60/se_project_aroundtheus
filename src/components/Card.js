@@ -1,15 +1,14 @@
-import { openModal, closeModal, handleEscUp } from "../utils/utils.js";
-
 const cardImageModal = document.querySelector("#card-image");
 const cardPreviewImage = document.querySelector(".modal__card-image-preview");
 const cardPreviewTitle = document.querySelector(".modal__title");
 const cardImage = document.querySelector(".card__image");
 
 class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link }, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -29,6 +28,7 @@ class Card {
       .querySelector(".card__image")
       .addEventListener("click", () => {
         this._handlePreviewPicture();
+        this._handleCardClick(this._name, this._link);
       });
   }
 
