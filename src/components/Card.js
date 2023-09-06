@@ -27,7 +27,7 @@ class Card {
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        this._handlePreviewPicture();
+        // this._handlePreviewPicture();
         this._handleCardClick(this._name, this._link);
       });
   }
@@ -43,12 +43,12 @@ class Card {
       .classList.toggle("card__like-button_active");
   }
 
-  _handlePreviewPicture() {
-    cardPreviewImage.src = this._link;
-    cardPreviewImage.alt = this._name;
-    cardPreviewTitle.textContent = this._name;
-    openModal(cardImageModal);
-  }
+  // _handlePreviewPicture() {
+  //   cardPreviewImage.src = this._link;
+  //   cardPreviewImage.alt = this._name;
+  //   cardPreviewTitle.textContent = this._name;
+  //   openModal(cardImageModal);
+  // }
 
   getView() {
     this._cardElement = document

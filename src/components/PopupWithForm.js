@@ -24,7 +24,7 @@ class PopupWithForm extends Popup {
       this.close();
     });
 
-    super.setEventListeners();
+    super._setEventListeners();
   }
 
   close() {
