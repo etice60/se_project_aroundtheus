@@ -7,13 +7,12 @@ class Popup {
   }
 
   _handleEscClose(evt) {
-    evt.preventDefault();
     if (evt.key === "Escape") {
       this.close();
     }
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     this._popupElement.addEventListener("click", (evt) => {
       if (
         evt.target.classList.contains("modal_is-opened") ||

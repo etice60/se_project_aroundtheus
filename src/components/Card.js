@@ -1,7 +1,7 @@
-const cardImageModal = document.querySelector("#card-image");
-const cardPreviewImage = document.querySelector(".modal__card-image-preview");
-const cardPreviewTitle = document.querySelector(".modal__title");
-const cardImage = document.querySelector(".card__image");
+//const cardImageModal = document.querySelector("#card-image");
+//const cardPreviewImage = document.querySelector(".modal__card-image-preview");
+//const cardPreviewTitle = document.querySelector(".modal__title");
+//const cardImage = document.querySelector(".card__image");
 
 class Card {
   constructor({ name, link }, cardSelector, handleCardClick) {
