@@ -8,13 +8,12 @@ class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    this._inputList = this._popupElement.querySelectorAll(".modal__input");
-    this._formValues = {};
-    this._inputList.forEach(
-      (input) => (this._formValues[input.name] = input.value)
-    );
+    const inputList = document.querySelectorAll(".modal__input");
+    const formValues = {};
 
-    return this._formValues;
+    inputList.forEach((input) => (formValues[input.name] = input.value));
+
+    return formValues;
   }
 
   setEventListeners() {

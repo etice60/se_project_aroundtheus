@@ -124,15 +124,15 @@ const editProfilePopup = new PopupWithForm(
 );
 editProfilePopup.setEventListeners();
 
-function renderCard(cardData, wrapper) {
-  const newCard = new Card(cardData, cardSelector, handleCardClick);
-  cardSection.addItem(newCard.getView());
-}
+//function renderCard(cardData, wrapper) {
+//const newCard = new Card(cardData, cardSelector, handleCardClick);
+//cardSection.addItem(newCard.getView());
+//}
 
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: renderCard,
+    renderer: createCard,
   },
   cardListSelector
 );
@@ -146,20 +146,22 @@ function handleCardClick(name, link) {
   imagePreviewPopup.open(name, link);
 }
 
-function handleProfileFormSubmit(evt) {
-  //evt.preventDefault();
-  profileTitle.textContent = nameInput.value;
-  profileDescription.textContent = jobInput.value;
-  //closeModal(editProfileModal);
-
-  //editFormValidator.toggleButtonState();
+function handleProfileFormSubmit(data) {
+  userInfo.setUserInfo(data);
+  editProfilePopup.close();
 }
 
-function handleAddCardFormSubmit() {
+function createCard(cardData) {
+  const newCard = new Card(cardData, cardSelector, handleCardClick);
+  cardSection.addItem(newCard.getView());
+}
+
+function handleAddCardFormSubmit(data) {
+  cardSection.addItem(createCard(data));
   //evt.preventDefault();
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  renderCard({ name, link }, cardsWrap);
+  // const name = cardTitleInput.value;
+  // const link = cardUrlInput.value;
+  // renderCard({ name, link }, cardsWrap);
   //closeModal(addCardModal);
   //addCardFormElement.reset();
   //toggleButtonState(
