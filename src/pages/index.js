@@ -73,6 +73,7 @@ const cardPreviewCloseButton = cardImageModal.querySelector(
 );
 
 // Form Data
+// 1. make sure both args are profile not input fields
 const userInfo = new UserInfo(profileTitle, profileDescription);
 
 const nameInput = profileFormElement.querySelector(".modal__input_type_name");
@@ -147,7 +148,7 @@ function handleCardClick(name, link) {
 }
 
 function handleProfileFormSubmit(data) {
-  userInfo.setUserInfo(data);
+  userInfo.setUserInfo(data.title, data.description);
   editProfilePopup.close();
 }
 
@@ -157,41 +158,21 @@ function createCard(cardData) {
 }
 
 function handleAddCardFormSubmit(data) {
-  cardSection.addItem(createCard(data));
-  //evt.preventDefault();
-  // const name = cardTitleInput.value;
-  // const link = cardUrlInput.value;
-  // renderCard({ name, link }, cardsWrap);
-  //closeModal(addCardModal);
-  //addCardFormElement.reset();
-  //toggleButtonState(
-  // [cardTitleInput, cardUrlInput],
-  //addCardSubmitButton,
-  //config
-  //);
+  const newCard = createCard({ name: data.title, link: data.url });
+  // cardSection.addItem(newCard);
+  addCardPopup.close();
 }
 
 function fillProfileForm() {
   const userData = userInfo.getUserInfo();
-  profileTitle.value = userData.name;
-  profileDescription.value = userData.description;
+  nameInput.value = userData.name;
+  jobInput.value = userData.description;
 }
 
 function openProfileForm() {
   fillProfileForm();
   editProfilePopup.open();
 }
-
-// Form Listerners
-profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-//addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
-
-//profileEditButton.addEventListener("click", () => {
-// nameInput.value = profileTitle.textContent;
-//jobInput.value = profileDescription.textContent;
-//toggleButtonState([nameInput, jobInput], editProfileSubmitButton, config);
-//openModal(editProfileModal);
-//});
 
 // Event Listeners
 profileEditButton.addEventListener("click", openProfileForm);
@@ -202,7 +183,19 @@ addNewCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
   addCardPopup.open();
 });
-addCardModalCloseButton.addEventListener("click", () => addCardPopup.close());
+
+// Form Listerners
+//profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+//addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
+
+//profileEditButton.addEventListener("click", () => {
+//nameInput.value = profileTitle.textContent;
+//jobInput.value = profileDescription.textContent;
+//toggleButtonState([nameInput, jobInput], editProfileSubmitButton, config);
+//openModal(editProfileModal);
+//});
+
+//addCardModalCloseButton.addEventListener("click", () => addCardPopup.close());
 
 //initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
@@ -216,3 +209,17 @@ addCardModalCloseButton.addEventListener("click", () => addCardPopup.close());
     }
   });
 });*/
+
+//cardSection.addItem(createCard(data));
+//evt.preventDefault();
+// const name = cardTitleInput.value;
+// const link = cardUrlInput.value;
+// renderCard({ name, link }, cardsWrap);
+//closeModal(addCardModal);
+//addCardFormElement.reset();
+//toggleButtonState(
+// [cardTitleInput, cardUrlInput],
+//addCardSubmitButton,
+//config
+//);
+//}
