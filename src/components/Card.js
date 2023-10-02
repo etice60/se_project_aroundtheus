@@ -4,30 +4,43 @@
 //const cardImage = document.querySelector(".card__image");
 
 class Card {
-  constructor({ name, link }, cardSelector, handleCardClick) {
+  constructor(
+    { name, link, _id },
+    cardSelector,
+    handleCardClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._id = _id;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
+  }
+
+  getId() {
+    return this._id;
   }
 
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this._handleLikeIcon();
+        this.handleLikeClick(this);
       });
 
     this._cardElement
       .querySelector(".card__delete-button")
       .addEventListener("click", () => {
-        this._handleDeleteCard();
+        this._handleDeleteClick(this);
       });
 
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        // this._handlePreviewPicture();
+        //this._handlePreviewPicture();
         this._handleCardClick(this._name, this._link);
       });
   }
@@ -42,6 +55,16 @@ class Card {
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
   }
+
+  deleteCard() {
+    this._handleDeleteCard();
+  }
+
+  // handleModalDeleteButton() {
+  //   this._modalDeleteButton.addEventListener("click", () => {
+  //     this._cardElement.remove();
+  //   });
+  // }
 
   // _handlePreviewPicture() {
   //   cardPreviewImage.src = this._link;

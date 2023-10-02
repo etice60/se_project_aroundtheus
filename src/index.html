@@ -22,19 +22,24 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="avatar"
-            class="profile__image"
-          />
+          <div class="profile__avatar">
+            <button
+              class="profile__avatar-button"
+              id="avatar-button"
+              type="button"
+            ></button>
+            <img src="" alt="avatar" class="profile__image" />
+          </div>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
+            <!--<h1 class="profile__title">Jacques Cousteau</h1> -->
             <button
               class="profile__edit-button"
               id="profile-edit-button"
               type="button"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
+            <!-- <p class="profile__description">Explorer</p> -->
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -72,7 +77,7 @@
           <label class="modal__label">
             <input
               type="text"
-              name="description"
+              name="about"
               class="modal__input modal__input_type_description"
               id="profile-description"
               placeholder="Description"
@@ -83,6 +88,31 @@
             <span class="modal__error" id="profile-description-error"></span>
           </label>
           <button type="submit" class="modal__button">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- EDIT AVATAR IMAGE -->
+    <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container modal__container_avatar">
+        <button class="modal__close-button" type="button"></button>
+        <form
+          class="modal__form"
+          name="avatar-form"
+          id="avatar-form"
+          novalidate
+        >
+          <p class="modal__heading">Change profile picture</p>
+          <input
+            name="avatar"
+            placeholder="Image Link"
+            id="avatar-link"
+            type="url"
+            class="modal__button modal__form-input_type_avartar"
+            required
+          />
+          <span class="modal__error" id="avatar-link-error"></span>
+          <button class="modal__buton" type="submit">Save</button>
         </form>
       </div>
     </div>
@@ -100,7 +130,7 @@
           <label class="modal__label">
             <input
               type="text"
-              name="title"
+              name="name"
               class="modal__input modal__input_type_title"
               placeholder="Title"
               id="modal-title-add-card"
@@ -113,9 +143,9 @@
           <label class="modal__label">
             <input
               type="url"
-              name="url"
+              name="link"
               class="modal__input modal__input_type_url"
-              placeholder="Image URL"
+              placeholder="Link"
               id="modal-url-add-card"
               required
             />
@@ -134,6 +164,16 @@
           type="button"
         ></button>
         <img class="modal__card-image-preview" src="#" alt="" />
+      </div>
+    </div>
+    <!-- Opening Confirm Delete Modal -->
+    <div class="modal" id="delete-modal">
+      <div class="modal__container modal__container_confirm">
+        <button class="modal__close"></button>
+        <form class="modal__form">
+          <p class="modal__heading">Are you sure?</p>
+          <button class="modal__button" type="submit">Yes</button>
+        </form>
       </div>
     </div>
 
