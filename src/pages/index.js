@@ -255,7 +255,8 @@ function createCard(cardData) {
       });
     },
     (card) => {
-      if (card._isliked) {
+      console.log(card._isLiked, card);
+      if (card._isLiked) {
         api
           .removeCardLike(card.getId())
           .then(() => {
