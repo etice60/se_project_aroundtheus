@@ -1,26 +1,19 @@
 class UserInfo {
-  constructor(name, about, avatar) {
+  constructor(name, description) {
     this.name = name;
-    this.about = about;
-    this.avatar = avatar;
+    this.description = description;
   }
 
   getUserInfo() {
     return {
-      about: this.about.textContent,
+      description: this.description.textContent,
       name: this.name.textContent,
-      avatar: this.avatar.src,
     };
   }
 
-  setUserInfo(name, about) {
+  setUserInfo(name, description) {
     this.name.textContent = name;
-    this.about.textContent = about;
-  }
-
-  setAvatar(avatar) {
-    this.avatar.src = avatar;
-    this.avatar.alt = this.name.textContent;
+    this.description.textContent = description;
   }
 }
 
