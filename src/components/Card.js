@@ -1,21 +1,18 @@
-//const cardImageModal = document.querySelector("#card-image");
-//const cardPreviewImage = document.querySelector(".modal__card-image-preview");
-//const cardPreviewTitle = document.querySelector(".modal__title");
-//const cardImage = document.querySelector(".card__image");
-
 class Card {
   constructor(
     { name, link, _id },
     cardSelector,
     handleCardClick,
     handleDeleteClick,
-    handleLikeClick
+    handleLikeClick,
+    isLiked
   ) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._id = _id;
+    this._isLiked = isLiked;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
   }
@@ -27,8 +24,8 @@ class Card {
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
-      .addEventListener("click", () => {
-        this.handleLikeClick(this);
+      .addEventListener("mousedown", () => {
+        this._handleLikeClick(this);
       });
 
     this._cardElement
@@ -43,6 +40,19 @@ class Card {
         //this._handlePreviewPicture();
         this._handleCardClick(this._name, this._link);
       });
+  }
+
+  _renderLikes() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
+    }
+  }
+
+  setLikes(isLiked) {
+    this._isLiked = isLiked;
+    this._renderLikes();
   }
 
   _handleDeleteCard() {
@@ -60,24 +70,15 @@ class Card {
     this._handleDeleteCard();
   }
 
-  // handleModalDeleteButton() {
-  //   this._modalDeleteButton.addEventListener("click", () => {
-  //     this._cardElement.remove();
-  //   });
-  // }
-
-  // _handlePreviewPicture() {
-  //   cardPreviewImage.src = this._link;
-  //   cardPreviewImage.alt = this._name;
-  //   cardPreviewTitle.textContent = this._name;
-  //   openModal(cardImageModal);
-  // }
-
   getView() {
     this._cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
+
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+    //this._isLiked = this._cardElement.querySelector(".card__like-button");
+    this._renderLikes();
     this._renderCard();
     this._setEventListeners();
     return this._cardElement;
