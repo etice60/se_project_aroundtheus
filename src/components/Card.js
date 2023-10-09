@@ -1,11 +1,10 @@
 class Card {
   constructor(
-    { name, link, _id },
+    { name, link, _id, isLiked },
     cardSelector,
     handleCardClick,
     handleDeleteClick,
-    handleLikeClick,
-    isLiked
+    handleLikeClick
   ) {
     this._name = name;
     this._link = link;
@@ -24,7 +23,7 @@ class Card {
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
-      .addEventListener("mousedown", () => {
+      .addEventListener("click", () => {
         this._handleLikeClick(this);
       });
 
@@ -37,7 +36,6 @@ class Card {
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        //this._handlePreviewPicture();
         this._handleCardClick(this._name, this._link);
       });
   }
@@ -77,7 +75,6 @@ class Card {
       .cloneNode(true);
 
     this._likeButton = this._cardElement.querySelector(".card__like-button");
-    //this._isLiked = this._cardElement.querySelector(".card__like-button");
     this._renderLikes();
     this._renderCard();
     this._setEventListeners();

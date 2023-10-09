@@ -234,7 +234,9 @@ function createCard(cardData) {
   const newCard = new Card(
     cardData,
     cardSelector,
-    () => {},
+    () => {
+      imagePreviewPopup.open(cardData.name, cardData.link);
+    },
     (card) => {
       deleteCardModal.open(cardData);
       deleteCardModal.setAction(() => {
@@ -313,9 +315,9 @@ avatarButton.addEventListener("click", () => {
 //cardSection.addItem(newCard.getView());
 //}
 
-/*function handleCardClick(name, link) {
-  imagePreviewPopup.open(name, link);
-}*/
+// function handleCardClick(name, link) {
+//   imagePreviewPopup.open(name, link);
+// }
 
 /*function handleProfileFormSubmit(data) {
   userInfo.setUserInfo(data.title, data.description);

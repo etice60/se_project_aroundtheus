@@ -177,6 +177,10 @@
     padding-bottom: 36px;
     margin-bottom: 0;
   }
+
+  .profile__avatar-button {
+    margin-left: 29px;
+  }
 }
 
 @media screen and (max-width: 618px) {
@@ -210,6 +214,10 @@
 
   .profile__info {
     grid-template-columns: minmax(auto, 282px) auto;
+  }
+
+  .profile__avatar-button {
+    margin-top: 22px;
   }
 
   .profile__description {
