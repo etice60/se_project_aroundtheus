@@ -89,7 +89,6 @@ const avatarModalPopup = new PopupWithForm(
   "#edit-avatar-modal",
   (avatarData) => {
     avatarModalPopup.setButtonText(true);
-    // setButtonText("Saving ...")
     api
       .editUserPhoto(avatarData)
       .then((data) => {
@@ -99,7 +98,9 @@ const avatarModalPopup = new PopupWithForm(
       .catch((err) => {
         console.error(err);
       })
-      .finally(() => avatarModalPopup.setButtonText());
+      .finally(() => {
+        avatarModalPopup.setButtonText(false);
+      });
   }
 );
 
@@ -132,12 +133,14 @@ const editProfilePopup = new PopupWithForm("#edit-modal", (card) => {
   return api
     .editUserInfo(card)
     .then((res) => {
-      editProfilePopup.setButtonText(false);
       userInfo.setUserInfo(res.name, res.about);
       editProfilePopup.close();
     })
     .catch((error) => {
       console.error(error);
+    })
+    .finally(() => {
+      editProfilePopup.setButtonText(false);
     });
 });
 editProfilePopup.setEventListeners();
