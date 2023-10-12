@@ -14,10 +14,10 @@ class PopupWithConfirmation extends Popup {
     this._cardData = cardData;
   }
 
-  close() {
-    this._popupForm.reset();
-    super.close();
-  }
+  // close() {
+  //   this._popupForm.reset();
+  //   super.close();
+  // }
 
   setButtonText(submit, buttonText = "Saving...") {
     if (submit) {

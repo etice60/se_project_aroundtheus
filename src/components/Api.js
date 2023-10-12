@@ -1,7 +1,7 @@
 class Api {
-  constructor({ baseUrl, authToken }) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
-    this._authToken = authToken;
+    this._headers = headers;
   }
 
   _checkResponse(res) {
@@ -12,20 +12,15 @@ class Api {
     }
   }
 
-  // GET https://around-api.en.tripleten-services.com/v1/cards
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._authToken,
-      },
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: this._authToken,
-      },
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
@@ -33,10 +28,7 @@ class Api {
     console.log(data);
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.title,
         about: data.about,
@@ -47,10 +39,7 @@ class Api {
   editUserPhoto(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -60,10 +49,7 @@ class Api {
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -74,30 +60,21 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
   addCardLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
   removeCardLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authToken,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 }

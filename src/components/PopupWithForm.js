@@ -23,7 +23,7 @@ class PopupWithForm extends Popup {
     if (submit) {
       this._submitButton.textContent = buttonText;
     } else {
-      this._submitButton.text;
+      this._submitButton.textContent = this._submitButtonText;
     }
   }
 
@@ -31,8 +31,6 @@ class PopupWithForm extends Popup {
     this._popupElement.addEventListener("submit", () => {
       this._data = this._getInputValues();
       this._handleFormSubmit(this._data);
-
-      this.close();
     });
 
     super.setEventListeners();

@@ -8,38 +8,15 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Popup from "../components/Popup.js";
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import { settings, initialCards } from "../utils/constants.js";
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  authToken: "1634fdcb-9403-4d55-a456-722f52658f70",
+  headers: {
+    authorization: "1634fdcb-9403-4d55-a456-722f52658f70",
+    "Content-Type": "application/json",
+  },
 });
-
-export const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
 
 export const cardData = {
   name: "Yosemite Valley",
@@ -105,14 +82,6 @@ const cardSelector = "#card-template";
 /*         Validation         */
 /*----------------------------*/
 
-const settings = {
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
 const editFormElement = editProfileModal.querySelector(".modal__form");
 const addFormElement = addCardModal.querySelector(".modal__form");
 
@@ -120,6 +89,7 @@ const avatarModalPopup = new PopupWithForm(
   "#edit-avatar-modal",
   (avatarData) => {
     avatarModalPopup.setButtonText(true);
+    // setButtonText("Saving ...")
     api
       .editUserPhoto(avatarData)
       .then((data) => {
@@ -135,32 +105,6 @@ const avatarModalPopup = new PopupWithForm(
 
 const avatarModalElement = avatarModal.querySelector(".modal__form");
 
-/*----------------------------------*/
-/*      card like/remove likes      */
-/*----------------------------------*/
-
-// const handleLikeCard = (card) => {
-//   if (card._isliked) {
-//     api
-//       .removeCardLike(card._cardId)
-//       .then(() => {
-//         card.setLikes(false);
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//       });
-//   } else {
-//     api
-//       .addCardLike(card._cardId)
-//       .then(() => {
-//         card.setLikes(true);
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//       });
-//   }
-// };
-
 /*----------------------*/
 /*      popup items     */
 /*----------------------*/
@@ -172,9 +116,13 @@ const addCardPopup = new PopupWithForm("#add-card-modal", (cardData) => {
     .then((res) => {
       console.log(res);
       createCard(res);
+      addCardPopup.close();
     })
     .catch((error) => {
       console.error(error);
+    })
+    .finally(() => {
+      addCardPopup.setButtonText(false);
     });
 });
 addCardPopup.setEventListeners();
@@ -184,8 +132,9 @@ const editProfilePopup = new PopupWithForm("#edit-modal", (card) => {
   return api
     .editUserInfo(card)
     .then((res) => {
-      console.log(res);
+      editProfilePopup.setButtonText(false);
       userInfo.setUserInfo(res.name, res.about);
+      editProfilePopup.close();
     })
     .catch((error) => {
       console.error(error);
@@ -240,7 +189,7 @@ function createCard(cardData) {
     (card) => {
       deleteCardModal.open(cardData);
       deleteCardModal.setAction(() => {
-        deleteCardModal.setButtonText(true);
+        deleteCardModal.setButtonText(true, "Deleting...");
         api
           .deleteCard(card._id)
           .then(() => {
@@ -273,9 +222,7 @@ function createCard(cardData) {
           .then(() => {
             card.setLikes(true);
           })
-          .catch((err) => {
-            console.error(err);
-          });
+          .catch(console.error);
       }
     }
   );
@@ -296,9 +243,9 @@ function openProfileForm() {
 // Event Listeners
 profileEditButton.addEventListener("click", openProfileForm);
 
-profileModalCloseButton.addEventListener("click", () =>
-  editProfilePopup.close()
-);
+// profileModalCloseButton.addEventListener("click", () =>
+//   editProfilePopup.close()
+// );
 
 addNewCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
